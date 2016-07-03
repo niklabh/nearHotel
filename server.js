@@ -13,7 +13,6 @@ var bodyParser = require('body-parser');
 var async = require('async');
 var socketio = require('socket.io');
 var express = require('express');
-var routes = require('./routes');
 
 //
 // ## SimpleServer `SimpleServer(obj)`
@@ -53,9 +52,9 @@ router.use(function(req, res, next) {
 if (router.get('env') === 'development') {
   router.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.json({
       message: err.message,
-      error: err
+      stack: err.stack
     });
   });
 }
@@ -64,9 +63,9 @@ if (router.get('env') === 'development') {
 // no stacktraces leaked to user
 router.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.json({
     message: err.message,
-    error: {}
+    status: err.status
   });
 });
 
