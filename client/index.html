@@ -10,91 +10,138 @@
         padding-top: 60px;
       }
     </style>
-    <script>
-      function ChatController($scope) {
-        var socket = io.connect();
-
-        $scope.messages = [];
-        $scope.roster = [];
-        $scope.name = '';
-        $scope.text = '';
-
-        socket.on('connect', function () {
-          $scope.setName();
-        });
-
-        socket.on('message', function (msg) {
-          $scope.messages.push(msg);
-          $scope.$apply();
-        });
-
-        socket.on('roster', function (names) {
-          $scope.roster = names;
-          $scope.$apply();
-        });
-
-        $scope.send = function send() {
-          console.log('Sending message:', $scope.text);
-          socket.emit('message', $scope.text);
-          $scope.text = '';
-        };
-
-        $scope.setName = function setName() {
-          socket.emit('identify', $scope.name);
-        };
-      }
-    </script>
   </head>
   <body>
-    <div class="container" ng-controller="ChatController">
-      <div class="navbar navbar-fixed-top navbar-inverse">
-        <div class="navbar-inner">
-          <div class="pull-right">
-            <a href="https://c9.io" class="brand">Cloud9 IDE</a>
-          </div>
-        </div>
-      </div>
-      <div class="page-header">
-        <h1>Chat Example</h1>
-      </div>
-      <div class="row">
-        <div class="span3">
-          <ul class="nav nav-list well">
-            <li class="nav-header">Local Users</li>
-            <li ng-repeat="user in roster" ng-bind="user">
-            </li>
-          </ul>
-        </div>
-        <div class="span9">
-          <table class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th class="span2">Name</th>
-                <th class="span7">Text</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="msg in messages">
-                <td class="span2" ng-bind="msg.name"></td>
-                <td class="span7" ng-bind="msg.text"></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="row controls">
-            <form ng-submit="send()">
-              <div class="span2"><input type="text" class="input-block-level" ng-model="name" ng-change="setName()" placeholder="Your Name"></div>
-              <div class="input-append span7">
-                <input type="text" class="span6" ng-model="text" placeholder="Message">
-                <input type="submit" class="span1 btn btn-primary" value="Send" ng-disabled="!text">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/angular.min.js"></script>
+    <h1>Booking Service</h1>
+    <a href="https://www.getpostman.com/collections/a8e4094487bf327751e4">Postman Collection Link</a> to test Api
+    <h2>API</h2>
+    <pre>
+      CREATE BOOKING
+
+      POST https://near-hotel-niklabh.c9users.io/create_booking
+      req:
+      {
+          "hotel_id":"akjsd321",
+          "user_id":"23jqjw2j333",
+          "hotel_name":"Grand Palace",
+          "hotel_desc":"Awesome hotel",
+          "hotel_image":"https://awesome.hotel",
+          "hotel_rating":5,
+          "check_in":1467533557368,
+          "check_out":1467533557368,
+          "first_name":"Nikhil",
+          "last_name":"Ranjan",
+          "email":"niklabh811@gmail.com",
+          "phone":"8527445570",
+          "price": 3456.34,
+          "hotel_address":"1st street Bombay",
+          "hotel_lat":12323.231,
+          "hotel_long":4355.23
+      }
+      res:
+      {
+        "status": "OK",
+        "message": "Hotel Booked Successfully!",
+        "id": 3
+      }
+      error:
+      {
+        "status":"ERR",
+        "message": "Error message"
+      }
+      
+      
+      
+      LIST BOOKING FOR USER
+      
+      GET https://near-hotel-niklabh.c9users.io/list_booking?user_id=USER_ID
+      res:
+      [
+        {
+          "id": 2,
+          "user_id": "23jqjw2j333",
+          "hotel_id": "akjsd321",
+          "hotel_name": "Grand Palace",
+          "hotel_desc": "Awesome hotel",
+          "hotel_address": "1st street Bombay",
+          "hotel_lat": "12323.231",
+          "hotel_long": "4355.23",
+          "hotel_image": "https://awesome.hotel",
+          "hotel_rating": 5,
+          "updated_at": "2016-07-03T09:49:17.000Z",
+          "created_at": "2016-07-03T09:49:17.000Z",
+          "check_in": "2016-07-03T08:12:37.000Z",
+          "check_out": "2016-07-03T08:12:37.000Z",
+          "first_name": "Nikhil",
+          "last_name": "Ranjan",
+          "email": "niklabh811@gmail.com",
+          "phone": "8527445570",
+          "price": "3456.34",
+          "info": null
+        },
+        {
+          "id": 3,
+          "user_id": "23jqjw2j333",
+          "hotel_id": "akjsd321",
+          "hotel_name": "Grand Palace",
+          "hotel_desc": "Awesome hotel",
+          "hotel_address": "1st street Bombay",
+          "hotel_lat": "12323.231",
+          "hotel_long": "4355.23",
+          "hotel_image": "https://awesome.hotel",
+          "hotel_rating": 5,
+          "updated_at": "2016-07-03T09:56:50.000Z",
+          "created_at": "2016-07-03T09:56:50.000Z",
+          "check_in": "2016-07-03T08:12:37.000Z",
+          "check_out": "2016-07-03T08:12:37.000Z",
+          "first_name": "Nikhil",
+          "last_name": "Ranjan",
+          "email": "niklabh811@gmail.com",
+          "phone": "8527445570",
+          "price": "3456.34",
+          "info": null
+        }
+      ]
+      
+      error:
+      {
+        status: "ERR",
+        message: "Error Message"
+      }
+      
+      
+      
+      GET BOOKING DETAIL
+      GET https://near-hotel-niklabh.c9users.io/booking/BOOKING_ID?user_id=USER_ID
+      res:
+      {
+        "id": 3,
+        "user_id": "23jqjw2j333",
+        "hotel_id": "akjsd321",
+        "hotel_name": "Grand Palace",
+        "hotel_desc": "Awesome hotel",
+        "hotel_address": "1st street Bombay",
+        "hotel_lat": "12323.231",
+        "hotel_long": "4355.23",
+        "hotel_image": "https://awesome.hotel",
+        "hotel_rating": 5,
+        "updated_at": "2016-07-03T09:56:50.000Z",
+        "created_at": "2016-07-03T09:56:50.000Z",
+        "check_in": "2016-07-03T08:12:37.000Z",
+        "check_out": "2016-07-03T08:12:37.000Z",
+        "first_name": "Nikhil",
+        "last_name": "Ranjan",
+        "email": "niklabh811@gmail.com",
+        "phone": "8527445570",
+        "price": "3456.34",
+        "info": null
+      }
+      error:
+      {
+        "message": "Booking not found",
+        "status": "ERR"
+      }
+    </pre>
+
   </body>
 </html>

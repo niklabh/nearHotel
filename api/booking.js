@@ -62,8 +62,9 @@ module.exports = {
             user_id: req.query.user_id
         };
         bookingModel.list(options, function(err, result){
-            if (err) return next(err);      
-            res.json(result || []);
+            if (err) return next(err);
+            if (!result || !result.length) return next(new Error("Booking not found"));
+            res.json(result[0]);
         });
     }
 };
