@@ -16,6 +16,12 @@
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
     "mysequel": "git://github.com/niklabh/mysequel.git",
-    "mysql": "2.1.0"
-  }
+    "mysql": "2.1.0",
+    "snyk": "^1.68.0"
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
