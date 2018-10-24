@@ -7,14 +7,14 @@
   "author": "Mostafa Eweda <mo.eweda@gmail.com>",
   "dependencies": {
     "async": "~0.2.8",
-    "express": "~3.2.4",
+    "express": "~4.15.5",
     "socket.io": "~0.9.14",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
+    "serve-favicon": "~2.4.5",
     "mysequel": "git://github.com/niklabh/mysequel.git",
     "mysql": "2.1.0"
   }
