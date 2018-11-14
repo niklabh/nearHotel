@@ -13,7 +13,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "jade": "~1.11.0",
-    "morgan": "~1.7.0",
+    "morgan": "~1.9.1",
     "serve-favicon": "~2.3.0",
     "mysequel": "git://github.com/niklabh/mysequel.git",
     "mysql": "2.1.0"
