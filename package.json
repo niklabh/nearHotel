@@ -7,9 +7,9 @@
   "author": "Mostafa Eweda <mo.eweda@gmail.com>",
   "dependencies": {
     "async": "~0.2.8",
-    "express": "~3.2.4",
+    "express": "~4.0.0",
     "socket.io": "~0.9.14",
-    "body-parser": "~1.15.1",
+    "body-parser": "~1.19.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "jade": "~1.11.0",
